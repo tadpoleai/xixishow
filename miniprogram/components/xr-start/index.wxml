@@ -1,52 +1,21 @@
-<!-- <xr-scene ar-system="modes:Plane" bind:ready="handleReady">
-    <xr-assets bind:loaded="handleAssetsLoaded">
-        <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
-        <xr-asset-load type="gltf" asset-id="miku" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/miku.glb" />
-    </xr-assets>
-
-    <xr-env env-data="xr-frame-team-workspace-day" />
-    <xr-light type="ambient" color="1 1 1" intensity="1" />
-    <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="3" cast-shadow />
-
-    <xr-ar-tracker mode="Plane">
-        <xr-gltf model="anchor"></xr-gltf>
-    </xr-ar-tracker>
-    <xr-node node-id="setitem" visible="false">
-        <xr-gltf model="miku" anim-autoplay scale="0.08 0.08 0.08" rotation="0 180 0" />
-    </xr-node>
-
-    <xr-camera clear-color="0.4 0.8 0.6 1" background="ar" is-ar-camera />
-</xr-scene> -->
-
-<xr-scene ar-system="modes:Marker" bind:ready="handleReady">
-  <xr-assets bind:loaded="handleAssetsLoaded">
-    <xr-asset-load
-      type="video-texture" asset-id="hikari" options="loop:true"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/2dmarker/hikari-v.mp4"
-    />
-    <!-- for particles -->
-    <xr-asset-load type="texture" asset-id="point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
-
-    <xr-asset-material asset-id="mat" effect="simple" uniforms="u_baseColorMap: video-hikari" />
+<xr-scene ar-system="modes:Marker" id="xr-scene" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
   </xr-assets>
-
-  <xr-node wx:if="{{loaded}}">
-    <xr-ar-tracker
-      mode="Marker" bind:ar-tracker-switch="handleTrackerSwitch"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/2dmarker/hikari.jpg"
-    >
-      <xr-mesh node-id="mesh-plane" geometry="plane" material="mat" />
-      <!-- for particles -->
-      <xr-particle
-        capacity="500" emit-rate="20"
-        size="0.03 0.06" life-time="2 3" speed="0.04 0.1"
-        start-color="1 1 1 0.8" end-color="1 1 1 0.2"
-        emitter-type="BoxShape"
-        emitter-props="minEmitBox:-0.5 0 0.5,maxEmitBox:0.5 0.2 0,direction:0 0 -1,direction2:0 0 -1"
-        texture="point"
-      />
+  <xr-env env-data="xr-frame-team-workspace-day" />
+  <xr-node wx:if="{{arReady}}">
+    <xr-ar-tracker mode="Marker" src="{{markerImg}}">
+      <xr-gltf model="gltf" anim-autoplay position="0.2 0 -0.2" scale="0.6 0.6 0.6" rotation="0 -50 0" />
+      <xr-gltf model="gltf" anim-autoplay position="0.4 0 0.3" scale="0.5 0.5 0.5" rotation="0 -50 0" />
+      <xr-gltf model="gltf" anim-autoplay position="-0.3 0 0.3" scale="0.4 0.4 0.4" rotation="0 -50 0" />
     </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="0.8 2.2 -5" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
   </xr-node>
-
-  <xr-camera clear-color="0.4 0.8 0.6 1" background="ar" is-ar-camera />
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
 </xr-scene>

@@ -1,41 +1,46 @@
-// components/index.ts
 Component({
-
-    /**
-     * 组件的属性列表
-     */
+    behaviors: [require('../common/share-behavior').default],
     properties: {
-
-    },
-
-    /**
-     * 组件的初始数据
-     */
-    data: {
-
-    },
-
-    /**
-     * 组件的方法列表
-     */
-    methods: {
-        handleReady : function({detail})
-        {
-            this.scene = detail.value;
+        markerImg: {
+            type: String
         },
-        // handleAssetsLoaded: function({detail}) {
-        //     wx.showToast({title: '点击屏幕放置'});
-        //     this.scene.event.add('touchstart', () => {
-        //       this.scene.ar.placeHere('setitem', true);
-        //     });
-        //   },
-          handleAssetsLoaded: function ({detail}) {
-            this.setData({loaded: true});
-          },
-          handleTrackerSwitch: function ({detail}) {
-            const active = detail.value;
-            const video = this.scene.assets.getAsset('video-texture', 'hikari');
-            active ? video.play() : video.stop();
-          }
+    },
+    data: {
+        loaded: false,
+        arReady: false,
+    },
+    lifetimes: {
+        attached() {
+            console.log('data', this.data)
+        }
+    },
+    methods: {
+        handleReady({
+            detail
+        }) {
+            const xrScene = this.scene = detail.value;
+            console.log('xr-scene', xrScene);
+        },
+        handleAssetsProgress: function ({
+            detail
+        }) {
+            console.log('assets progress', detail.value);
+        },
+        handleAssetsLoaded: function ({
+            detail
+        }) {
+            console.log('assets loaded', detail.value);
+            this.setData({
+                loaded: true
+            });
+        },
+        handleARReady: function ({
+            detail
+        }) {
+            console.log('arReady');
+            this.setData({
+                arReady: true
+            })
+        }
     }
 })
