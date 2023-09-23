@@ -30,7 +30,7 @@ Page({
     behaviors: [sceneReadyBehavior],
     data: {
       xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-      markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg',
+      markerImg: 'https://arshow01-1316491823.cos.ap-shanghai.myqcloud.com/xixi.jpg',
       width: 300,
       height: 300,
       renderWidth: 300,
