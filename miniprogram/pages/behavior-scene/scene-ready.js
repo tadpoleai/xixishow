@@ -74,7 +74,7 @@ module.exports = Behavior({
         }
       },
       getTitle() {
-        return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'XR-FRAME官方示例';
+        return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'PGVerse Team';
       },
       handleARTrackerState({detail}) {
         const {state, error} = detail;
