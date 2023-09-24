@@ -1,0 +1,10 @@
+<xr-demo-viewer title="熙熙" intro="识别熙熙手拿糖油果子图像，识别成功后，会出现熙熙跳出来的动画" hint="">
+  <xr-start disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;" markerImg="{{markerImg}}" bind:arTrackerState="handleARTrackerState" />
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+  <!-- <button bindtap="handleChangeMarkerImg">
+    点击替换Marker图像
+  </button> -->
+</xr-demo-viewer>
